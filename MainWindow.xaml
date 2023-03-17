@@ -1,0 +1,209 @@
+﻿<Window x:Class="BardAfar.MainWindow"
+        x:ClassModifier="internal"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:s="clr-namespace:System;assembly=mscorlib"
+        xmlns:local="clr-namespace:BardAfar"        
+        mc:Ignorable="d"
+        Title="Bard Afar" Height="400" Width="480" 
+        Closing="Window_Closing" Loaded="Window_Loaded"
+        >
+    <Window.DataContext>
+        <local:ViewModel/>
+    </Window.DataContext>
+    <Window.Resources>
+        <ResourceDictionary>
+            <BooleanToVisibilityConverter x:Key="BoolToVis" />
+            <Style TargetType="Button">
+                <Setter Property="Width" Value="26" />
+                <Setter Property="Height" Value="26" />
+                <Setter Property="FontFamily" Value="{StaticResource FontAwesome}" />
+            </Style>
+            <Style x:Key="SetupControls" TargetType="Grid" >
+                <Setter Property="Margin" Value="0 0 3 0" />
+            </Style>
+            <Style TargetType="ListBoxItem">
+                <Setter Property="Cursor" Value="Arrow"/>
+                <Style.Triggers>
+                    <Trigger Property="Border.IsMouseOver" Value="True">
+                        <Setter Property="Cursor" Value="Hand"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <Style x:Key="LogTextBox" TargetType="TextBox" >
+                <Setter Property="FontFamily" Value="Consolas" />
+                <Setter Property="Padding" Value="5" />
+                <Setter Property="IsReadOnly" Value="True" />
+            </Style>
+            <Style TargetType="Slider">
+                <Setter Property="Width" Value="100" />
+                <Setter Property="Minimum" Value="0.0" />
+                <Setter Property="Maximum" Value="1.0" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="LargeChange" Value="0.2" />
+                <Setter Property="SmallChange" Value="0.1" />
+                <Setter Property="Orientation" Value="Horizontal" />
+            </Style>
+            <Style TargetType="StackPanel">
+                <Setter Property="Orientation" Value="Horizontal" />
+            </Style>
+            <Style x:Key="StartButton" TargetType="Button">
+                <Setter Property="IsEnabled" Value="False" />
+                <Setter Property="Width" Value="auto" />
+                <Setter Property="Height" Value="26" />
+                <Setter Property="Margin" Value="0 3" />
+                <Setter Property="FontFamily" Value="{StaticResource FontAwesome}" />
+                <Style.Triggers>
+                    <MultiDataTrigger>
+                        <MultiDataTrigger.Conditions>
+                            <Condition Binding="{Binding Path=(Validation.HasError), ElementName=HostOrIp}" Value="False"/>
+                            <Condition Binding="{Binding Path=(Validation.HasError), ElementName=PortHttp}" Value="False"/>
+                            <Condition Binding="{Binding Path=(Validation.HasError), ElementName=PortWs}" Value="False"/>
+                            <Condition Binding="{Binding Path=(Validation.HasError), ElementName=AudioDir}" Value="False"/>
+                            <Condition Binding="{Binding Path=(Validation.HasError), ElementName=TrackPadding}" Value="False"/>
+                        </MultiDataTrigger.Conditions>
+                        <Setter Property="IsEnabled" Value="True"/>
+                    </MultiDataTrigger>
+                </Style.Triggers>
+            </Style>
+            <Style TargetType="TextBox">
+                <Setter Property="FontFamily" Value="Consolas" />
+                <Setter Property="Padding" Value="2 5" />
+                <Setter Property="Margin" Value="0 3" />
+            </Style>
+            <Style x:Key="TimerTextBlock" TargetType="TextBlock" >
+                <Setter Property="FontFamily" Value="Consolas" />
+                <Setter Property="Padding" Value="2 5" />
+                <Setter Property="MinWidth" Value="40" />
+                <Setter Property="TextAlignment" Value="Center" />
+            </Style>
+            <Style TargetType="ToggleButton">
+                <Setter Property="MinWidth" Value="25" />
+                <Setter Property="MinHeight" Value="25" />
+                <Setter Property="FontFamily" Value="{StaticResource FontAwesome}" />
+                <Style.Triggers>
+                    <Trigger Property="IsChecked" Value="True">
+                        <Setter Property="BorderThickness" Value="4" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <Style x:Key="VolumeTextBlock" TargetType="TextBlock" >
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="Padding" Value="5" />
+                <Setter Property="FontFamily" Value="{StaticResource FontAwesome}" />
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Name="SetupControls" Style="{StaticResource SetupControls}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Column="0" Grid.Row="0">Host or IP Address:</Label>
+            <TextBox Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Name="HostOrIp">
+                <TextBox.Text>
+                    <Binding Path="HostOrIpAddress">
+                        <Binding.ValidationRules>
+                            <local:ValidationRuleHostOrIp/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            <Label Grid.Column="0" Grid.Row="1">Port (HTTP):</Label>
+            <TextBox Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Name="PortHttp" Text="{Binding PortHttpListener}"></TextBox>
+            <Label Grid.Column="0" Grid.Row="2">Port (WebSocket):</Label>
+            <TextBox Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Name="PortWs" Text="{Binding PortWebSocket}"></TextBox>
+            <Label Grid.Column="0" Grid.Row="3">Audio Files Directory:</Label>
+            <TextBox Grid.Column="1" Grid.Row="3" Name="AudioDir">
+                <TextBox.Text>
+                    <Binding Path="AudioFilesDirectory">
+                        <Binding.ValidationRules>
+                            <local:ValidationRuleAudioDir/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            <Button Grid.Column="2" Grid.Row="3" FontFamily="{StaticResource FontAwesome}" Click="BrowseAudioDirectory_Click">&#xf07c;</Button>
+            <Label Grid.Column="0" Grid.Row="4">Silence Between Tracks (Seconds):</Label>
+            <TextBox Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" Name="TrackPadding" Text="{Binding TrackPaddingSeconds}"></TextBox>
+            <Label Grid.Column="0" Grid.Row="5">Command:</Label>
+            <Button Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2" Click="StartHost_Click" Style="{StaticResource StartButton}">Start Server</Button>
+        </Grid>
+        <Grid Grid.Row="1" Name="PlayerControls">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <WrapPanel Grid.Row="0">
+                <StackPanel>
+                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"></Separator>
+                    <ToggleButton ToolTip="Stop" IsChecked="{Binding Stopped}" Click="StopButton_Click">&#xf04d;</ToggleButton>
+                    <ToggleButton ToolTip="Play" IsChecked="{Binding Playing}" Click="PlayButton_Click">&#xf04b;</ToggleButton>
+                </StackPanel>
+                <StackPanel>
+                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"></Separator>
+                    <Button ToolTip="Next Track" Click="NextButton_Click" >&#xf051;</Button>
+                </StackPanel>
+                <StackPanel>
+                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"></Separator>
+                    <TextBlock Style="{StaticResource TimerTextBlock}" ToolTip="Time Left on Track (m:s)" Text="{Binding TrackRemaining, StringFormat=hh\\:mm\\:ss, Mode=OneWay}"/>
+                    </StackPanel>
+                <StackPanel>
+                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"></Separator>
+                    <ToggleButton ToolTip="Play in Next in Order" IsChecked="{Binding IterateNext, Mode=OneWay}" Click="IterateNext_Click">&#xf178;</ToggleButton>
+                    <ToggleButton ToolTip="Randomise Next" IsChecked="{Binding IterateRandom, Mode=OneWay}" Click="IterateRandom_Click">&#xf074;</ToggleButton>
+                </StackPanel>
+                <StackPanel>
+                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"></Separator>
+                    <ToggleButton ToolTip="Stop when Track Complete" IsChecked="{Binding LoopStop, Mode=OneWay}" Click="LoopStop_Click">&#xf051;</ToggleButton>
+                    <ToggleButton ToolTip="Repeat Same Track" IsChecked="{Binding LoopRepeatTrack, Mode=OneWay}" Click="LoopRepeatTrack_Click">&#xf021;</ToggleButton>
+                    <ToggleButton ToolTip="Repeat Directory" IsChecked="{Binding LoopRepeatDirectory, Mode=OneWay}" Click="LoopRepeatDirectory_Click">&#xf0e2;</ToggleButton>
+                </StackPanel>
+                <StackPanel>
+                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"></Separator>
+                    <TextBlock Style="{StaticResource VolumeTextBlock}">&#xf028;</TextBlock>
+                    <Slider ToolTip="Volume" Value="{Binding Volume}"/>
+                </StackPanel>
+                <StackPanel>
+                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"></Separator>
+                    <ToggleButton Name="ToggleDirView" ToolTip="Show File Browser" IsChecked="{Binding DirViewVisible}">&#xf07c;</ToggleButton>
+                    <ToggleButton Name="ToggleLog" ToolTip="Show Log" IsChecked="{Binding LogVisible}">&#xf15c;</ToggleButton>
+                </StackPanel>
+            </WrapPanel>
+            <ListBox Grid.Row="1" Name="DirectoryListBox"
+                        Visibility="{Binding DirViewVisible, Converter={StaticResource BoolToVis}}" 
+                        MouseUp="DirectoryListBox_MouseUp"/>
+            <TextBox Grid.Row="1" Name="LogTextBox" 
+                        Style="{StaticResource LogTextBox}"
+                        Text="{Binding Log, Mode=OneWay}" 
+                        Visibility="{Binding LogVisible, Converter={StaticResource BoolToVis}}"/>
+            <MediaElement Name="MediaElement" 
+                            LoadedBehavior="Manual"
+                            MediaOpened="MediaElement_MediaOpened" 
+                            Visibility="Collapsed"
+                            Volume="{Binding Volume}"/>
+        </Grid>
+    </Grid>
+</Window>

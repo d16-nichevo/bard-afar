@@ -1,0 +1,235 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<!-- This HTML file is loaded by clients.-->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bard Afar</title>
+    <link rel="icon" type="image/png" href="data:image/png;base64,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">
+
+    <style>
+        html {
+            font-family: sans-serif;
+            font-size: 20px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        table {
+            background-color: lightgrey;
+            border: 0.1rem solid darkgray;
+            border-radius: 0.5rem;
+            box-shadow: 0.25rem 0.25rem 0.25rem rgba(0,0,0,0.15);
+            padding: 0.25rem 0.5rem;
+        }
+
+        input[type="range"] {
+            width: 100%;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            color: darkred;
+            font-family: monospace;
+        }
+
+        th > div {
+            display: flex;
+            font-family: monospace;
+            font-style: italic;
+        }
+
+        th > div > div {
+            flex-grow: 0;
+        }
+
+        th > div > div:first-of-type, th > div > div:last-of-type {
+            border-color: darkgrey;
+            border-style: solid;
+            border-width: 0.25rem 0;
+            flex-grow: 1;
+            margin: 0.25rem;
+        }
+
+        td:first-of-type {
+            line-height: 0;
+            text-align: center;
+        }
+
+        #ws-start,
+        #info {
+            width: 10rem;
+        }
+
+        #connection-led {
+            background-image: radial-gradient(red 0%, darkred 100%);
+            border-radius: 0.5rem;
+            display: inline-block;
+            height: 1rem;
+            width: 1rem;
+        }
+
+        #connection-led.green {
+            background-image: radial-gradient(palegreen 0%, darkgreen 100%);
+        }
+
+        #info {
+            background-color: white;
+            border: 1px solid darkgrey;
+            height: 1rem;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        #info p {
+            animation: marquee 10s linear infinite;
+            color: darkgreen;
+            display: inline-block;
+            font-family: monospace;
+            font-size: 0.75rem;
+            font-weight: bold;
+            margin-top: 0;
+            padding-left: 100%;
+            vertical-align: text-top;
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            100% {
+                transform: translate(-100%, 0);
+            }
+        }
+    </style>
+
+    <script type="text/javascript">
+
+        // Get port for websocket. The capitalised text in the line below
+        // will be replaced by server - side code:
+        let portWebsocket = PORT_TOKEN;
+
+        // Connect to the WebSocket server:
+        function connect() {
+            // Get DOM elements:
+            let audioElement = document.querySelector("audio");
+            let info = document.getElementById("info");
+            let infoText = document.querySelector("#info p");
+            let download = document.getElementById("download");
+            let connectLed = document.getElementById("connection-led");
+
+            // Hide connection button, show info area:
+            document.getElementById("ws-start").hidden = true;
+            info.hidden = false;
+
+            // Connect:
+            let url = "ws://" + location.hostname + ":" + portWebsocket + location.pathname;
+            let ws = new WebSocket(url);
+
+            // Setup events:
+            ws.onopen = e => {
+                infoText.innerText = "Connected! Waiting for next track...";
+                connectLed.className = "green";
+            };
+            ws.onmessage = e => {
+                if (e.data == "STOP") {
+                    audioElement.pause();
+                    infoText.innerText = "Connected! Waiting for next track...";
+                    download.setAttribute("href", "#");
+                    download.setAttribute("target", "_self");
+                }
+                else {
+                    audioElement.src = location.protocol + "//" + location.hostname + ":" + location.port + e.data;
+                    var playPromise = audioElement.play();
+                    if (playPromise !== undefined) {
+                        playPromise.then(_ => {
+                            // Play successful:
+                            infoText.innerText = decodeURI(e.data);
+                            download.setAttribute("href", e.data);
+                            download.setAttribute("target", "_blank");
+                        })
+                            .catch(e => {
+                                // Play error (hopefully not terminal):
+                                infoText.innerText = "Connected! Waiting for next track...";
+                                download.setAttribute("href", "#");
+                                download.setAttribute("target", "_self");
+                                addError(e);
+                            });
+                    }
+                }
+            };
+            ws.onerror = e => {
+                infoText.innerText = "Error. Refresh page to reconnect.";
+                download.setAttribute("href", "#");
+                download.setAttribute("target", "_self");
+                connectLed.className = "red";
+                addError(e);
+            };
+            ws.onclose = e => {
+                infoText.innerText = "Closed by host. Refresh page to reconnect.";
+                download.setAttribute("href", "#");
+                download.setAttribute("target", "_self");
+                connectLed.className = "red";
+                addError(e.reason);
+            };
+        };
+
+        function setVolume(newVolume) {
+            document.querySelector("audio").volume = newVolume / 100.0;
+        }
+
+        function addError(errorText) {
+            var li = document.createElement("li");
+            li.appendChild(document.createTextNode(errorText));
+            document.getElementById("errors").appendChild(li);
+        }
+
+    </script>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <th colspan="3">
+                <div>
+                    <div></div>
+                    <div>Bard Afar</div>
+                    <div></div>
+                </div>
+            </th>
+        </tr>
+        <tr>
+            <td><div id="connection-led"></div></td>
+            <td>
+                <button id="ws-start" onclick="connect()">&raquo; CLICK TO CONNECT &laquo;</button>
+                <div id="info" hidden="hidden"><p></p></div>
+            </td>
+            <td><a id="download" target="_self" download="" title="Download current track" href="#">&#128190;</a></td>
+        </tr>
+        <tr>
+            <td>&#128266;</td>
+            <td colspan="2">
+                <input type="range" min="0" max="100" step="1" value="50" oninput="setVolume(this.value)" onchange="setVolume(this.value)">
+            </td>
+        </tr>
+    </table>
+
+    <ul id="errors"></ul>
+
+	<audio></audio>
+
+</body>
+</html>
