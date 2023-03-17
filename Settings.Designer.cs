@@ -12,7 +12,7 @@ namespace BardAfar {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.4.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.5.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -175,7 +175,7 @@ namespace BardAfar {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("8989")]
+        [global::System.Configuration.DefaultSettingValueAttribute("58470")]
         public ushort ServerInfoPortHttpListener {
             get {
                 return ((ushort)(this["ServerInfoPortHttpListener"]));
@@ -187,7 +187,7 @@ namespace BardAfar {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("8990")]
+        [global::System.Configuration.DefaultSettingValueAttribute("58471")]
         public ushort ServerInfoPortWebSocket {
             get {
                 return ((ushort)(this["ServerInfoPortWebSocket"]));

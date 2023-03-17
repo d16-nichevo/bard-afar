@@ -51,10 +51,10 @@
       <Value Profile="(Default)">*</Value>
     </Setting>
     <Setting Name="ServerInfoPortHttpListener" Type="System.UInt16" Scope="User">
-      <Value Profile="(Default)">8989</Value>
+      <Value Profile="(Default)">58470</Value>
     </Setting>
     <Setting Name="ServerInfoPortWebSocket" Type="System.UInt16" Scope="User">
-      <Value Profile="(Default)">8990</Value>
+      <Value Profile="(Default)">58471</Value>
     </Setting>
     <Setting Name="ServerInfoAudioDirectory" Type="System.String" Scope="User">
       <Value Profile="(Default)" />

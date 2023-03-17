@@ -107,7 +107,7 @@ namespace BardAfar
 
             // Pre-load client page HTML:
             Uri uri = new Uri("/ClientPage.html", UriKind.Relative);
-            StreamResourceInfo info = System.Windows.Application.GetContentStream(uri);
+            StreamResourceInfo info = System.Windows.Application.GetResourceStream(uri);
             string clientPageText = new StreamReader(info.Stream).ReadToEnd();
             clientPageText = clientPageText.Replace(Settings.Default.ClientPagePortToken, Convert.ToString(Model.PortWebSocket));
 
