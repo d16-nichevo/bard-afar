@@ -1,0 +1,75 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="BardAfar" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="WebSocketServerUrlFormat" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">ws://{0}:{1}</Value>
+    </Setting>
+    <Setting Name="WebSocketServerPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">/</Value>
+    </Setting>
+    <Setting Name="HttpListenerPrefixFormat" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://{0}:{1}/</Value>
+    </Setting>
+    <Setting Name="ClientPagePortToken" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">PORT_TOKEN</Value>
+    </Setting>
+    <Setting Name="HttpListenerServerPathBase" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">/</Value>
+    </Setting>
+    <Setting Name="SupportedAudioExtensions" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">wav,mp3,ogg</Value>
+    </Setting>
+    <Setting Name="HttpListenerMaxConnections" Type="System.Byte" Scope="Application">
+      <Value Profile="(Default)">32</Value>
+    </Setting>
+    <Setting Name="AppExitTimeoutMs" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">500</Value>
+    </Setting>
+    <Setting Name="LogLimitLines" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">100</Value>
+    </Setting>
+    <Setting Name="LogFormat" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">{0:T} {1}</Value>
+    </Setting>
+    <Setting Name="BroadcastStop" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">STOP</Value>
+    </Setting>
+    <Setting Name="TrackTimeRefreshIntervalMs" Type="System.Double" Scope="Application">
+      <Value Profile="(Default)">1000</Value>
+    </Setting>
+    <Setting Name="LogWebSocketConnectionOpenFormat" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Client connected: {0}</Value>
+    </Setting>
+    <Setting Name="LogWebSocketConnectionCloseFormat" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Client disconnected: {0}</Value>
+    </Setting>
+    <Setting Name="UpdateSettings" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ServerInfoHostOrIpAddress" Type="System.String" Scope="User">
+      <Value Profile="(Default)">*</Value>
+    </Setting>
+    <Setting Name="ServerInfoPortHttpListener" Type="System.UInt16" Scope="User">
+      <Value Profile="(Default)">8989</Value>
+    </Setting>
+    <Setting Name="ServerInfoPortWebSocket" Type="System.UInt16" Scope="User">
+      <Value Profile="(Default)">8990</Value>
+    </Setting>
+    <Setting Name="ServerInfoAudioDirectory" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Volume" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0.5</Value>
+    </Setting>
+    <Setting Name="LoopMode" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="IterationMode" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="TrackPaddingSeconds" Type="System.UInt32" Scope="User">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
