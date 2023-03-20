@@ -53,7 +53,7 @@ Source: "BardAfar.exe"; DestDir: "{app}";
 Source: "BardAfar.dll.config"; DestDir: "{app}";
 
 [Icons]
-Name: "{group}\BardAfar"; Filename: "{app}\BardAfar.exe.exe"; WorkingDir: "{app}";
+Name: "{group}\BardAfar"; Filename: "{app}\BardAfar.exe"; WorkingDir: "{app}";
 Name: "{group}\Uninstall BardAfar"; Filename: "{uninstallexe}"
 Name: "{commondesktop}\BardAfar"; Filename: "{app}\BardAfar.exe"; WorkingDir: "{app}"; Tasks: desktopicons
 
