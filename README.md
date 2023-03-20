@@ -1,6 +1,32 @@
 # Bard Afar
 
-Music streaming server for Windows. The host runs Bard Afar; clients need only to connect with a web browser.
+Audio streaming server for Windows, intended for music ambience for online tabletop RPG sessions, but possibly usable for a number of applications.
+
+The host runs Bard Afar; clients need only to connect with a web browser.
+
+## Screenshots: Host
+
+![image](https://user-images.githubusercontent.com/44771168/226324058-2395ce9a-0d47-480f-8f38-ff96b3606260.png)
+
+![image](https://user-images.githubusercontent.com/44771168/226331131-df570a86-0ca4-41fc-98bc-264bd07af4a6.png)
+
+## Screenshots: Client
+
+![image](https://user-images.githubusercontent.com/44771168/226339516-ea85c449-bc64-4c4c-a678-c8c6b2e77e78.png)
+
+## Raison D'etre
+
+In 2021, YouTube started [taking down](https://www.theverge.com/2021/9/12/22669502/youtube-discord-rythm-music-bot-closure) a variety of Discord bots that were able to play audio from Discord. These bots were the go-to way for many online [tabletop RPG](https://en.wikipedia.org/wiki/Tabletop_role-playing_game) groups to add music to their gaming sessions, given that Discord was commonly used for voice chat anyway.
+
+Nowadays, some [Virtual Tabletops](https://en.wikipedia.org/wiki/Digital_tabletop_game#Virtual_tabletops) have ways to play music. Some do it better than others, and not everyone uses a Virtual Tabletop for online play.
+
+I thought it would be trivially easy to find easy-to-use live-audio-sharing software. I couldn't find anything. So I made Bard Afar. Bard Afar ***does not*** do what the old Discord bots does: it doesn't play YouTube videos. Instead it plays audio files on your computer. But that's good enough for me.
+
+(Maybe my search-fu is weak and there are are simple live-audio-sharing programs out there. If I missed some, oh well, now Bard Afar is another!)
+
+## Design Philosopy
+
+Bard Afar started as a [minimum viable product](https://en.wikipedia.org/wiki/Minimum_viable_product). If it proves to be a popular tool, I may fix bugs and add new functionality.
 
 # ⚠️ Important Notes ⚠️
 
@@ -75,8 +101,9 @@ Player notes:
 
 1. Receive an address from the person running the server. More information [here](#server-address-for-clients).
 2. Open a modern-day web browser (such as Chrome or Firefox).
-3. Enter that address into the address bar.
-4. You should see the Bard Afar page.<br/>
+   * Bard Afar should work on modern-day browsers on ***any device***. PCs, phones, tablets, etc.
+4. Enter that address into the address bar.
+5. You should see the Bard Afar page.<br/>
    ![image](https://user-images.githubusercontent.com/44771168/226333277-cd5cc942-69c4-4e6c-8969-a5448d67de8d.png)
 5. Click the "Click to Connect" button.
 6. The LED indicator should turn green.<br/>
@@ -92,5 +119,7 @@ Player notes:
 
 ## Server Address for Clients
 
-# About this Project
+# Contact the Author
+
+I can be contacted [here](https://deck16.net/contact).
 
