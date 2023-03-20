@@ -1,3 +1,5 @@
+# ⚠️ This README is currently a WIP ⚠️
+
 # Bard Afar
 
 Audio streaming server for Windows, intended for music ambience for online tabletop RPG sessions, but possibly usable for a number of applications.
@@ -8,7 +10,7 @@ The host runs Bard Afar; clients need only to connect with a web browser.
 
 ![image](https://user-images.githubusercontent.com/44771168/226324058-2395ce9a-0d47-480f-8f38-ff96b3606260.png)
 
-![image](https://user-images.githubusercontent.com/44771168/226331131-df570a86-0ca4-41fc-98bc-264bd07af4a6.png)
+![image](https://user-images.githubusercontent.com/44771168/226340459-8a68653f-d1e0-4058-a564-18f5586f6991.png)
 
 ## Screenshots: Client
 
@@ -88,7 +90,7 @@ Generally a value of around `10` seconds is recommended.
    * Clients will need to know an address to connect to. See [here](#server-address-for-clients) for more information.
 3. Close the window when you are done. This will stop playback and close the server.
 
-![image](https://user-images.githubusercontent.com/44771168/226331131-df570a86-0ca4-41fc-98bc-264bd07af4a6.png)
+![image](https://user-images.githubusercontent.com/44771168/226340497-2e9bd57d-585e-4605-bec6-26f7890223bf.png)
 
 Player notes:
 
@@ -117,7 +119,35 @@ Player notes:
 
 # Networking Issues
 
+## Port Forwarding
+
+In order for your server to be accessible over the internet, you'll almost certainly need to do something called "port forwarding".
+
+Explaining port forwarding is out-of-scope for this documentation. [This](https://www.howtogeek.com/66214/how-to-forward-ports-on-your-router/) is a good guide.
+
+The ports you need to forward are below. Both use TCP.
+
+1. The port you set for the HTTP server, as per [here](#port-http). The default is `58470`.
+1. The port you set for the websocket server, as per [here](#port-websocket). The default is `58471`.
+
+## Firewall
+
+Firewalls may block connection to Bard AFar, mostly on the computer running the server.
+
+
+
 ## Server Address for Clients
+
+Clients connect via a web browser, and will need to supply an address to do so.
+
+Addresses look something like `http://my.domain.com.au:58470/` or `http://20.112.52.29:58470/`
+
+If you are running a server on your machine, your address is `http://XXX:YYY/`, where:
+
+* `XXX` is your host name or IP address.
+  * It's probably easiest to use an IPv4 address. You want your internet-facing IP address, not your IP address on your local network. Do an internet search for "what is my IP address"; there are a number of sites that will return your IP address. It should look something like `20.112.52.29`.
+  * IPv6 addresses *should* work. But I've not tested them, and so haven't documented them.
+* `YYY` is the HTTP port. This should be exactly the number you entered [here](#port-http), the default being `58470`.
 
 # Contact the Author
 
