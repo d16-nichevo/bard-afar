@@ -1,10 +1,9 @@
-# ⚠️ This README is currently a WIP ⚠️
-
 # Bard Afar
 
-Audio streaming server for Windows, intended for music ambience for online tabletop RPG sessions, but possibly usable for a number of applications.
+An audio streaming solution, intended for music ambience for online tabletop RPG sessions, but possibly usable for a number of applications.
 
-The host runs Bard Afar; clients need only to connect with a web browser.
+* **The server** runs Bard Afar, a Windows application.
+* **Clients** connect with modern web browsers (Chrome, Firefox, etc) from any device (PC, tablet, phone, etc) and any operating system (Windows, Linux, etc).
 
 ## Screenshots: Host
 
@@ -25,10 +24,6 @@ Nowadays, some [Virtual Tabletops](https://en.wikipedia.org/wiki/Digital_tableto
 I thought it would be trivially easy to find easy-to-use live-audio-sharing software. I couldn't find anything. So I made Bard Afar. Bard Afar ***does not*** do what the old Discord bots does: it doesn't play YouTube videos. Instead it plays audio files on your computer. But that's good enough for me.
 
 (Maybe my search-fu is weak and there are are simple live-audio-sharing programs out there. If I missed some, oh well, now Bard Afar is another!)
-
-## Design Philosopy
-
-Bard Afar started as a [minimum viable product](https://en.wikipedia.org/wiki/Minimum_viable_product). If it proves to be a popular tool, I may fix bugs and add new functionality.
 
 # ⚠️ Important Notes ⚠️
 
@@ -115,28 +110,58 @@ Player notes:
 9. You can adjust the volume with the slider.
 10. You can download the currently-playing track by clicking the floppy disk icon 💾.
 11. You can close the browser, or the browser tab, safely at any time to stop using Bard Afar.
-12. If there's a failure of any sort, try refreshing the page.
 
-# Networking Issues
+# Troubleshooting
 
-## Port Forwarding
+## Known Issues
+
+1. Some audio files are not playable by the server, some are not playable by clients, and some are not playable by either.
+1. Clients will not play the track that is currently playing at time of connection. They will start playing the next song.
+
+## First Things to Try
+
+### Server: Run as Administrator
+
+If the server is having issues, try running Bard Afar as an administrator. Strictly speaking this shouldn't be necessary, but many users may find it easier to do this than to bother with troubleshooting steps discussed below.
+
+Right-click on the Bard Afar icon in your Start Menu and select "Run as Administrator".
+
+### Client: Refresh the Page
+
+If a client is having issues, simply refresh the page and reconnect.
+
+## Network Issues
+
+### Port Forwarding
 
 In order for your server to be accessible over the internet, you'll almost certainly need to do something called "port forwarding".
 
-Explaining port forwarding is out-of-scope for this documentation. [This](https://www.howtogeek.com/66214/how-to-forward-ports-on-your-router/) is a good guide.
+Explaining port forwarding is out-of-scope for this documentation. [This](https://www.howtogeek.com/66214/how-to-forward-ports-on-your-router/) is a good guide relevant to most home setups. More complex setups -- as seen in larger businesses, schools, or some apartments -- may require you to contact IT support.
 
 The ports you need to forward are below. Both use TCP.
 
 1. The port you set for the HTTP server, as per [here](#port-http). The default is `58470`.
 1. The port you set for the websocket server, as per [here](#port-websocket). The default is `58471`.
 
-## Firewall
+### Firewall
 
 Firewalls may block connection to Bard AFar, mostly on the computer running the server.
 
+The [installer](#installation) automatically adds firewall rules to allow incoming traffic on ports `58470` and `58471`. (These rules are removed as a part of uninstallation.) This should allow Bard Afar to work on typical home PC setups.
 
+If you want to create firewall rules for different ports:
 
-## Server Address for Clients
+1. Run a command prompt as an administrator. ([Here](https://www.howtogeek.com/194041/how-to-open-the-command-prompt-as-administrator-in-windows-8.1/) is a guide if needed.)
+1. Enter these commands, where "XXX" is [the port chosen for HTTP](#port-http) and "YYY" is [the port chosen for WebSocket](#port-websocket).
+   * `netsh.exe advfirewall firewall add rule name= "BardAfarCustom" dir=in action=allow protocol=TCP localport=`XXX`,`YYY
+   * `netsh.exe http add urlacl url=http://*:`XXX`/ user="Everyone"`
+1. If you want to undo these commands at a later date:
+   * `netsh.exe advfirewall firewall delete rule name="BardAfarCustom"`
+   * `netsh.exe http delete urlacl url=http://*:{#PortHttp}/`
+   
+Business or school machines may have stricter firewall setups. Contact IT support if you're in such a situation.
+
+### Server Address for Clients
 
 Clients connect via a web browser, and will need to supply an address to do so.
 
@@ -148,6 +173,16 @@ If you are running a server on your machine, your address is `http://XXX:YYY/`, 
   * It's probably easiest to use an IPv4 address. You want your internet-facing IP address, not your IP address on your local network. Do an internet search for "what is my IP address"; there are a number of sites that will return your IP address. It should look something like `20.112.52.29`.
   * IPv6 addresses *should* work. But I've not tested them, and so haven't documented them.
 * `YYY` is the HTTP port. This should be exactly the number you entered [here](#port-http), the default being `58470`.
+
+# Improvements
+
+Bard Afar started as a [minimum viable product](https://en.wikipedia.org/wiki/Minimum_viable_product). If it proves to be a popular tool, I may fix bugs and add new functionality.
+
+Here are some improvements I would like to implement:
+
+* UPnP support.
+* Better track synchronisation, where the clients indicate to the host when they are ready for the next track.
+* Fix [known issues](#known-issues).
 
 # Contact the Author
 
