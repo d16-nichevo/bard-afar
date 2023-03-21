@@ -2,8 +2,8 @@
 
 An audio streaming solution, intended for music ambience for online tabletop RPG sessions, but possibly usable for a number of applications.
 
-* **The server** runs Bard Afar, a Windows application.
-* **Clients** connect with modern web browsers (Chrome, Firefox, etc) from any device (PC, tablet, phone, etc) and any operating system (Windows, Linux, etc).
+* **The server** runs Bard Afar, a Windows application, and plays files from the local filesystem.
+* **Clients** connect with modern web browsers (Chrome, Firefox, etc) from any device (PC, tablet, phone, etc), any operating system (Windows, Linux, etc), across a LAN or even the internet.
 
 ## Screenshots: Host
 
@@ -33,7 +33,8 @@ Please read and understand the following before use.
 2. This software exposes files on your hard drive to the internet. It could share personal documents or other private files if:
    1. you mis-configure the software, or
    2. the software has bugs.
-3. There are some technical steps involved in setting up a Bard Afar server. Common issues are explained below. But I cannot predict every possible issue for every possible network.
+3. There are some technical steps involved in setting up a Bard Afar server. Common issues are [explained below](#troubleshooting). But I cannot predict every possible issue for every possible PC setup.
+4. ***The software is provided "as is", and you use the software at your own risk.***
 
 # Using the Bard Afar Server
 
@@ -56,7 +57,7 @@ Please read and understand the following before use.
 
 The host the server listens on. Must be a fully qualified domain name, an IPv4 or IPv6 literal string, or a wildcard. More information [here](https://learn.microsoft.com/en-gb/windows/win32/http/urlprefix-strings).
 
-Generally it's easiest to use the special wildcard character `*`, which listens on all 
+Generally it's easiest to use the special wildcard character `*`, which is a "catch-all" option. 
 
 ### Port (HTTP) 
 
@@ -70,7 +71,11 @@ The port used for the websocket server. The default is `58471`.
 
 The full path to a directory containing the audio/music files you wish to play to clients.
 
-* This directory can contain any number of sub-directories. You will be able to navigate freely between the contents of the specified directory and all sub-directories.
+* This directory can contain any number of sub-directories. You will be able to navigate freely between the contents of the specified directory and all sub-directories when selecting files to play.
+* Note that all files in this directory and its sub-directories will be accessible by clients.
+  * Files that you play are trivially easy to download (indeed, [it's a client feature](#using-the-bard-afar-client) to do this).
+  * Files that you don't play are technically accessible, but the client would have to guess the relative path and filename for the file.
+  * It is recommended that the directory you select for this option contains ***only*** music you want to play to clients.
 
 ### Silence Between Tracks (Seconds)
 
@@ -80,7 +85,7 @@ Generally a value of around `10` seconds is recommended.
 
 ## Using the Player
 
-1. Bard Afar will now start the server. The player interface will be shown.
+1. After you have [chosen server settings](#server-setup), Bard Afar will start as a server. The player interface will be shown.
 2. At this time, you can have clients connect to your server.
    * Clients will need to know an address to connect to. See [here](#server-address-for-clients) for more information.
 3. Close the window when you are done. This will stop playback and close the server.
@@ -92,14 +97,14 @@ Player notes:
 * Any connected client will hear what you play.
 * Hover over a button or control to see a tool-tip giving the button's purpose.
 * To navigate between sub-directories, click the directory names.
-  * Click on `..` to move to the parent directory. You cannot move to the parent of the [Audio Files Directory](#audio-files-directory) as configured above.
+  * Click on `..` at the top of the file list to move to the parent directory. You cannot move to the parent of the [Audio Files Directory](#audio-files-directory) as configured above.
 
 # Using the Bard Afar Client
 
 1. Receive an address from the person running the server. More information [here](#server-address-for-clients).
 2. Open a modern-day web browser (such as Chrome or Firefox).
    * Bard Afar should work on modern-day browsers on ***any device***. PCs, phones, tablets, etc.
-4. Enter that address into the address bar.
+4. Enter the address from step 1 into the address bar.
 5. You should see the Bard Afar page.<br/>
    ![image](https://user-images.githubusercontent.com/44771168/226333277-cd5cc942-69c4-4e6c-8969-a5448d67de8d.png)
 5. Click the "Click to Connect" button.
@@ -109,7 +114,7 @@ Player notes:
    * You can't hear a track that is in-progress. Wait for the next track to start.
 9. You can adjust the volume with the slider.
 10. You can download the currently-playing track by clicking the floppy disk icon 💾.
-11. You can close the browser, or the browser tab, safely at any time to stop using Bard Afar.
+11. You can safely close the browser, or the browser tab, at any time to stop using Bard Afar.
 
 # Troubleshooting
 
@@ -122,7 +127,7 @@ Player notes:
 
 ### Server: Run as Administrator
 
-If the server is having issues, try running Bard Afar as an administrator. Strictly speaking this shouldn't be necessary, but many users may find it easier to do this than to bother with troubleshooting steps discussed below.
+If the server is having issues, try running Bard Afar as an administrator. Strictly speaking this shouldn't be necessary, but it can solve a number of potential issues.
 
 Right-click on the Bard Afar icon in your Start Menu and select "Run as Administrator".
 
@@ -152,14 +157,14 @@ The [installer](#installation) automatically adds firewall rules to allow incomi
 If you want to create firewall rules for different ports:
 
 1. Run a command prompt as an administrator. ([Here](https://www.howtogeek.com/194041/how-to-open-the-command-prompt-as-administrator-in-windows-8.1/) is a guide if needed.)
-1. Enter these commands, where "XXX" is [the port chosen for HTTP](#port-http) and "YYY" is [the port chosen for WebSocket](#port-websocket).
-   * `netsh.exe advfirewall firewall add rule name= "BardAfarCustom" dir=in action=allow protocol=TCP localport=`XXX`,`YYY
-   * `netsh.exe http add urlacl url=http://*:`XXX`/ user="Everyone"`
+1. Enter these commands, where "XXX" is [the port chosen for HTTP](#port-http) and "YYY" is [the port chosen for websocket](#port-websocket).
+   * `netsh.exe advfirewall firewall add rule name= "BardAfarCustom" dir=in action=allow protocol=TCP localport=XXX,YYY`
+   * `netsh.exe http add urlacl url=http://*:XXX/ user="Everyone"`
 1. If you want to undo these commands at a later date:
    * `netsh.exe advfirewall firewall delete rule name="BardAfarCustom"`
    * `netsh.exe http delete urlacl url=http://*:{#PortHttp}/`
    
-Business or school machines may have stricter firewall setups. Contact IT support if you're in such a situation.
+Business or school machines may have stricter firewall setups, where these rules are not sufficient. Contact IT support if you're in such a situation.
 
 ### Server Address for Clients
 
@@ -170,7 +175,8 @@ Addresses look something like `http://my.domain.com.au:58470/` or `http://20.112
 If you are running a server on your machine, your address is `http://XXX:YYY/`, where:
 
 * `XXX` is your host name or IP address.
-  * It's probably easiest to use an IPv4 address. You want your internet-facing IP address, not your IP address on your local network. Do an internet search for "what is my IP address"; there are a number of sites that will return your IP address. It should look something like `20.112.52.29`.
+  * It's probably easiest to use an IPv4 address.
+  * If you're hosting over the internet, you want your internet-facing IP address, not your IP address on your local network. Do an internet search for "what is my IP address"; there are a number of sites that will return your IP address. It should look something like `20.112.52.29`.
   * IPv6 addresses *should* work. But I've not tested them, and so haven't documented them.
 * `YYY` is the HTTP port. This should be exactly the number you entered [here](#port-http), the default being `58470`.
 
@@ -180,11 +186,21 @@ Bard Afar started as a [minimum viable product](https://en.wikipedia.org/wiki/Mi
 
 Here are some improvements I would like to implement:
 
+* Fix [known issues](#known-issues).
 * UPnP support.
 * Better track synchronisation, where the clients indicate to the host when they are ready for the next track.
-* Fix [known issues](#known-issues).
+* Client support for "dark mode" using `prefers-color-scheme` media query feature.
+
+# Thanks To
+
+Bard Afar makes use of:
+
+* [Inno Setup](https://jrsoftware.org/isinfo.php)
+* [Simple HTTP](https://github.com/dajuric/simple-http/)
+* [websocket-sharp](http://sta.github.io/websocket-sharp/)
+
+Bard Afar was created in [Microsoft Visual Studio Community 2022](https://visualstudio.microsoft.com/vs/community/).
 
 # Contact the Author
 
 I can be contacted [here](https://deck16.net/contact).
-
