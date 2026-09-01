@@ -2,29 +2,11 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="BardAfar" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="WebSocketServerUrlFormat" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">ws://{0}:{1}</Value>
-    </Setting>
-    <Setting Name="WebSocketServerPath" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">/</Value>
-    </Setting>
-    <Setting Name="HttpListenerPrefixFormat" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">http://{0}:{1}/</Value>
-    </Setting>
     <Setting Name="ClientPagePortToken" Type="System.String" Scope="Application">
       <Value Profile="(Default)">PORT_TOKEN</Value>
     </Setting>
-    <Setting Name="HttpListenerServerPathBase" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">/</Value>
-    </Setting>
     <Setting Name="SupportedAudioExtensions" Type="System.String" Scope="Application">
       <Value Profile="(Default)">wav,mp3,ogg</Value>
-    </Setting>
-    <Setting Name="HttpListenerMaxConnections" Type="System.Byte" Scope="Application">
-      <Value Profile="(Default)">32</Value>
-    </Setting>
-    <Setting Name="AppExitTimeoutMs" Type="System.Int32" Scope="Application">
-      <Value Profile="(Default)">500</Value>
     </Setting>
     <Setting Name="LogLimitLines" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">100</Value>
@@ -48,7 +30,7 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="ServerInfoHostOrIpAddress" Type="System.String" Scope="User">
-      <Value Profile="(Default)">*</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="ServerInfoAudioDirectory" Type="System.String" Scope="User">
       <Value Profile="(Default)" />

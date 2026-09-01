@@ -159,7 +159,7 @@ namespace BardAfar
                 if (path == null) throw new ArgumentNullException(nameof(path));
                 path = path.Replace(@"\", "/");
                 path = HttpUtility.UrlPathEncode(path);
-                WatsonServer.Broadcast(Settings.Default.WebSocketServerPath + path);
+                WatsonServer.Broadcast(Settings.Default.UrlPathWebSocket + path);
             }
         }
 

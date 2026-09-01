@@ -25,33 +25,6 @@ namespace BardAfar {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("ws://{0}:{1}")]
-        public string WebSocketServerUrlFormat {
-            get {
-                return ((string)(this["WebSocketServerUrlFormat"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("/")]
-        public string WebSocketServerPath {
-            get {
-                return ((string)(this["WebSocketServerPath"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://{0}:{1}/")]
-        public string HttpListenerPrefixFormat {
-            get {
-                return ((string)(this["HttpListenerPrefixFormat"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("PORT_TOKEN")]
         public string ClientPagePortToken {
             get {
@@ -61,37 +34,10 @@ namespace BardAfar {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("/")]
-        public string HttpListenerServerPathBase {
-            get {
-                return ((string)(this["HttpListenerServerPathBase"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("wav,mp3,ogg")]
         public string SupportedAudioExtensions {
             get {
                 return ((string)(this["SupportedAudioExtensions"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("32")]
-        public byte HttpListenerMaxConnections {
-            get {
-                return ((byte)(this["HttpListenerMaxConnections"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("500")]
-        public int AppExitTimeoutMs {
-            get {
-                return ((int)(this["AppExitTimeoutMs"]));
             }
         }
         
@@ -163,7 +109,7 @@ namespace BardAfar {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("*")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string ServerInfoHostOrIpAddress {
             get {
                 return ((string)(this["ServerInfoHostOrIpAddress"]));

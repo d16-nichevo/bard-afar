@@ -118,6 +118,11 @@ namespace BardAfar
                 ServerPrimary.Stop();
                 ServerPrimary.Dispose();
             }
+            if (ServerSecondary != null)
+            {
+                ServerSecondary.Stop();
+                ServerSecondary.Dispose();
+            }
         }
 
         // Setup a server.

@@ -55,17 +55,22 @@ Please read and understand the following before use.
 
 ### Host or IP Address
 
-The host the server listens on. Must be a fully qualified domain name, an IPv4 or IPv6 literal string, or a wildcard. More information [here](https://learn.microsoft.com/en-gb/windows/win32/http/urlprefix-strings).
+Generally it's easiest to leave this blank to listen on all addresses (IPv4 and IPv6).
 
-Generally it's easiest to use the special wildcard character `*`, which is a "catch-all" option. 
+If you prefer, you can restrict allowed addresses by entering a value:
 
-### Port (HTTP) 
+* `+` (strong wildcard)
+* `*` (weak wildcard)
+* `0.0.0.0` (unspecified IPv4 address)
+* `::` or `[::]` (unspecified IPv6 address)
+* any literal IPv4 address
+* any literal IPv6 address (with or without square brackets)
 
-The port used for the HTTP server. The default is `58470`.
+More information [here](https://learn.microsoft.com/en-gb/windows/win32/http/urlprefix-strings).
 
-### Port (WebSocket)
+### Port
 
-The port used for the websocket server. The default is `58471`.
+The port used for the server. The default is `58470`.
 
 ### Audio Files Directory
 
@@ -143,26 +148,23 @@ In order for your server to be accessible over the internet, you'll almost certa
 
 Explaining port forwarding is out-of-scope for this documentation. [This](https://www.howtogeek.com/66214/how-to-forward-ports-on-your-router/) is a good guide relevant to most home setups. More complex setups -- as seen in larger businesses, schools, or some apartments -- may require you to contact IT support.
 
-The ports you need to forward are below. Both use TCP.
-
-1. The port you set for the HTTP server, as per [here](#port-http). The default is `58470`.
-1. The port you set for the websocket server, as per [here](#port-websocket). The default is `58471`.
+The port you need to forward is [what you set when you run the application](#port). The default is `58470`.
 
 ### Firewall
 
 Firewalls may block connection to Bard AFar, mostly on the computer running the server.
 
-The [installer](#installation) automatically adds firewall rules to allow incoming traffic on ports `58470` and `58471`. (These rules are removed as a part of uninstallation.) This should allow Bard Afar to work on typical home PC setups.
+The [installer](#installation) automatically adds firewall rules to allow incoming traffic on port `58470`. (These rules are removed as a part of uninstallation.) This should allow Bard Afar to work on typical home PC setups.
 
 If you want to create firewall rules for different ports:
 
 1. Run a command prompt as an administrator. ([Here](https://www.howtogeek.com/194041/how-to-open-the-command-prompt-as-administrator-in-windows-8.1/) is a guide if needed.)
-1. Enter these commands, where "XXX" is [the port chosen for HTTP](#port-http) and "YYY" is [the port chosen for websocket](#port-websocket).
-   * `netsh.exe advfirewall firewall add rule name= "BardAfarCustom" dir=in action=allow protocol=TCP localport=XXX,YYY`
+1. Enter these commands, where "XXX" is [the port](#port).
+   * `netsh.exe advfirewall firewall add rule name= "BardAfarCustom" dir=in action=allow protocol=TCP localport=XXX`
    * `netsh.exe http add urlacl url=http://*:XXX/ user="Everyone"`
 1. If you want to undo these commands at a later date:
    * `netsh.exe advfirewall firewall delete rule name="BardAfarCustom"`
-   * `netsh.exe http delete urlacl url=http://*:{#PortHttp}/`
+   * `netsh.exe http delete urlacl url=http://*:XXX/`
    
 Business or school machines may have stricter firewall setups, where these rules are not sufficient. Contact IT support if you're in such a situation.
 
@@ -178,7 +180,7 @@ If you are running a server on your machine, your address is `http://XXX:YYY/`, 
   * It's probably easiest to use an IPv4 address.
   * If you're hosting over the internet, you want your internet-facing IP address, not your IP address on your local network. Do an internet search for "what is my IP address"; there are a number of sites that will return your IP address. It should look something like `20.112.52.29`.
   * IPv6 addresses *should* work. But I've not tested them, and so haven't documented them.
-* `YYY` is the HTTP port. This should be exactly the number you entered [here](#port-http), the default being `58470`.
+* `YYY` is the port. This should be exactly the number you entered [here](#port), the default being `58470`.
 
 # Improvements
 
@@ -196,8 +198,7 @@ Here are some improvements I would like to implement:
 Bard Afar makes use of:
 
 * [Inno Setup](https://jrsoftware.org/isinfo.php)
-* [Simple HTTP](https://github.com/dajuric/simple-http/)
-* [websocket-sharp](http://sta.github.io/websocket-sharp/)
+* [Watson Webserver](https://github.com/dotnet/watsonwebserver)
 
 Bard Afar was created in [Microsoft Visual Studio Community 2022](https://visualstudio.microsoft.com/vs/community/).
 

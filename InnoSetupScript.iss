@@ -7,15 +7,15 @@
 ; the correct location on your file system.
 
 ; BinPath: where to source compiled files from:
-#define BinPath "C:\Documents\Programs\BardAfar\bin\Release\net6.0-windows\publish\win-x64"
+#define BinPath "C:\Documents\GitHub\BardAfar\bin\Release\Publish"
 
 ; Output path: where the installer file will go:
-#define OutputPath "C:\Documents\Programs\BardAfar\bin\Release\net6.0-windows\publish\win-x64"
+#define OutputPath "C:\Documents\GitHub\BardAfar\bin\Release\Publish"
 
 ; AppVer: point this to the BardAfar exe:
-#define AppVer GetVersionNumbersString("C:\Documents\Programs\BardAfar\bin\Release\net6.0-windows\publish\win-x64\BardAfar.exe")
+#define AppVer GetVersionNumbersString("C:\Documents\GitHub\BardAfar\bin\Release\Publish\BardAfar.exe")
 
-; Default ports for HttpListener and WebSocket
+; Default port:
 #define Port "58470"
 
 ; You should not need to change anything below.

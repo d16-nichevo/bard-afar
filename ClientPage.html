@@ -131,6 +131,9 @@
             let download = document.getElementById("download");
             let connectLed = document.getElementById("connection-led");
 
+            // Ensure volume is correct:
+            setVolume(document.getElementById("volume").value);
+
             // Hide connection button, show info area:
             document.getElementById("ws-start").hidden = true;
             info.hidden = false;
@@ -178,14 +181,14 @@
                 download.setAttribute("href", "#");
                 download.setAttribute("target", "_self");
                 connectLed.className = "red";
-                addError(e);
+                addError("Websocket error");
             };
             ws.onclose = e => {
                 infoText.innerText = "Closed by host. Refresh page to reconnect.";
                 download.setAttribute("href", "#");
                 download.setAttribute("target", "_self");
                 connectLed.className = "red";
-                addError(e.reason);
+                // addError(e.reason);
             };
         };
 
@@ -193,7 +196,19 @@
             document.querySelector("audio").volume = newVolume / 100.0;
         }
 
-        function addError(errorText) {
+        function addError(error) {
+            if (typeof error === "string") {
+                errorText = error;
+            }
+            else if (error instanceof Error) {
+                errorText = error.message;
+            }
+            else if (error instanceof Event) {
+                errorText = error.type;
+            }
+            else {
+                errorText = String(error);
+            }
             var li = document.createElement("li");
             li.appendChild(document.createTextNode(errorText));
             document.getElementById("errors").appendChild(li);
@@ -224,7 +239,7 @@
         <tr>
             <td>&#128266;</td>
             <td colspan="2">
-                <input type="range" min="0" max="100" step="1" value="50" oninput="setVolume(this.value)" onchange="setVolume(this.value)">
+                <input id="volume" type="range" min="0" max="100" step="1" value="50" oninput="setVolume(this.value)" onchange="setVolume(this.value)">
             </td>
         </tr>
     </table>

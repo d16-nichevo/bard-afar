@@ -7,8 +7,9 @@
         xmlns:s="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:BardAfar"        
         mc:Ignorable="d"
-        Title="Bard Afar" Height="400" Width="480" 
+        Title="Bard Afar" Height="260" Width="480" 
         Closing="Window_Closing" Loaded="Window_Loaded"
+        MinHeight="260" MinWidth="480"
         >
     <Window.DataContext>
         <local:ViewModel/>
@@ -78,6 +79,10 @@
                 <Setter Property="MinWidth" Value="40" />
                 <Setter Property="TextAlignment" Value="Center" />
             </Style>
+            <Style x:Key="LabelHint" TargetType="Label" >
+                <Setter Property="FontStyle" Value="Italic" />
+                <Setter Property="Padding" Value="0 0 0 10" />
+            </Style>
             <Style TargetType="ToggleButton">
                 <Setter Property="MinWidth" Value="25" />
                 <Setter Property="MinHeight" Value="25" />
@@ -116,8 +121,9 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
-            <Label Grid.Column="0" Grid.Row="0">Host or IP Address:</Label>
+            <Label Grid.Column="0" Grid.Row="0" >Host or IP Address:</Label>
             <TextBox Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Name="HostOrIp">
                 <TextBox.Text>
                     <Binding Path="HostOrIpAddress">
@@ -127,10 +133,16 @@
                     </Binding>
                 </TextBox.Text>
             </TextBox>
-            <Label Grid.Column="0" Grid.Row="1">Port:</Label>
-            <TextBox Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Name="Port" Text="{Binding Port}"></TextBox>
-            <Label Grid.Column="0" Grid.Row="3">Audio Files Directory:</Label>
-            <TextBox Grid.Column="1" Grid.Row="3" Name="AudioDir">
+            <Label Grid.Column="1" Grid.Row="1" Style="{StaticResource LabelHint}">
+                Leave blank to listen on all addresses.
+            </Label>
+            <Label Grid.Column="0" Grid.Row="2">Port:</Label>
+            <TextBox Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Name="Port" Text="{Binding Port}"></TextBox>
+            <Label Grid.Column="1" Grid.Row="3" Style="{StaticResource LabelHint}">
+                Default is 58470.
+            </Label>
+            <Label Grid.Column="0" Grid.Row="4">Audio Files Directory:</Label>
+            <TextBox Grid.Column="1" Grid.Row="4" Name="AudioDir">
                 <TextBox.Text>
                     <Binding Path="AudioFilesDirectory">
                         <Binding.ValidationRules>
@@ -139,11 +151,11 @@
                     </Binding>
                 </TextBox.Text>
             </TextBox>
-            <Button Grid.Column="2" Grid.Row="3" FontFamily="{StaticResource FontAwesome}" Click="BrowseAudioDirectory_Click">&#xf07c;</Button>
-            <Label Grid.Column="0" Grid.Row="4">Silence Between Tracks (Seconds):</Label>
-            <TextBox Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" Name="TrackPadding" Text="{Binding TrackPaddingSeconds}"></TextBox>
-            <Label Grid.Column="0" Grid.Row="5">Command:</Label>
-            <Button Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2" Click="StartHost_Click" Style="{StaticResource StartButton}">Start Server</Button>
+            <Button Grid.Column="2" Grid.Row="4" FontFamily="{StaticResource FontAwesome}" Click="BrowseAudioDirectory_Click">&#xf07c;</Button>
+            <Label Grid.Column="0" Grid.Row="5">Silence Between Tracks (Seconds):</Label>
+            <TextBox Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2" Name="TrackPadding" Text="{Binding TrackPaddingSeconds}"></TextBox>
+            <Label Grid.Column="0" Grid.Row="6">Command:</Label>
+            <Button Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="2" Click="StartHost_Click" Style="{StaticResource StartButton}">Start Server</Button>
         </Grid>
         <Grid Grid.Row="1" Name="PlayerControls">
             <Grid.ColumnDefinitions>
