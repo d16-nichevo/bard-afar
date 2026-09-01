@@ -51,7 +51,7 @@ Please read and understand the following before use.
 1. You are presented with some options (see below).
 1. Hit the "Start Server" button.
 
-![image](https://user-images.githubusercontent.com/44771168/226324058-2395ce9a-0d47-480f-8f38-ff96b3606260.png)
+<img alt="image" src="https://github.com/user-attachments/assets/e9ed6723-1cd6-4fb7-aa7a-bdf4340a3441" />
 
 ### Host or IP Address
 
