@@ -16,8 +16,7 @@
 #define AppVer GetVersionNumbersString("C:\Documents\Programs\BardAfar\bin\Release\net6.0-windows\publish\win-x64\BardAfar.exe")
 
 ; Default ports for HttpListener and WebSocket
-#define PortHttp "58470"
-#define PortWebSocket "58471"
+#define Port "58470"
 
 ; You should not need to change anything below.
 
@@ -45,7 +44,7 @@ MissingRunOnceIdsWarning=no
 ArchitecturesInstallIn64BitMode=x64
 
 [Tasks]
-Name: firewallrules; Description: "Add &firewall exceptions for ports {#PortHttp} and {#PortWebSocket}"
+Name: firewallrules; Description: "Add &firewall exceptions for port {#Port}"
 Name: desktopicons; Description: "Create desktop &icons"
 
 [Files]
@@ -58,9 +57,9 @@ Name: "{group}\Uninstall BardAfar"; Filename: "{uninstallexe}"
 Name: "{commondesktop}\BardAfar"; Filename: "{app}\BardAfar.exe"; WorkingDir: "{app}"; Tasks: desktopicons
 
 [Run]
-Filename: "{sys}\netsh.exe"; Parameters: "advfirewall firewall add rule name= ""BardAfar"" dir=in action=allow protocol=TCP localport={#PortHttp},{#PortWebSocket}"; StatusMsg: "Adding firewall rule (ports)"; Flags: runhidden; Tasks: firewallrules
-Filename: "{sys}\netsh.exe"; Parameters: "http add urlacl url=http://*:{#PortHttp}/ user=""Everyone""" ; StatusMsg: "Adding firewall rule (urlacl)"; Flags: runhidden; Tasks: firewallrules
+Filename: "{sys}\netsh.exe"; Parameters: "advfirewall firewall add rule name= ""BardAfar"" dir=in action=allow protocol=TCP localport={#Port}"; StatusMsg: "Adding firewall rule (ports)"; Flags: runhidden; Tasks: firewallrules
+Filename: "{sys}\netsh.exe"; Parameters: "http add urlacl url=http://*:{#Port}/ user=""Everyone""" ; StatusMsg: "Adding firewall rule (urlacl)"; Flags: runhidden; Tasks: firewallrules
 
 [UninstallRun]
 Filename: "{sys}\netsh.exe"; Parameters: "advfirewall firewall delete rule name=""BardAfar"""; StatusMsg: "Removing firewall rule (ports)"; Flags: runhidden; Tasks: firewallrules
-Filename: "{sys}\netsh.exe"; Parameters: "http delete urlacl url=http://*:{#PortHttp}/" ; StatusMsg: "Removing firewall rule (urlacl)"; Flags: runhidden; Tasks: firewallrules
+Filename: "{sys}\netsh.exe"; Parameters: "http delete urlacl url=http://*:{#Port}/" ; StatusMsg: "Removing firewall rule (urlacl)"; Flags: runhidden; Tasks: firewallrules

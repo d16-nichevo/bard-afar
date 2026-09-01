@@ -12,7 +12,7 @@ namespace BardAfar {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.5.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.14.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -133,7 +133,7 @@ namespace BardAfar {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Client connected: {0}")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Client connected: {0}:{1}")]
         public string LogWebSocketConnectionOpenFormat {
             get {
                 return ((string)(this["LogWebSocketConnectionOpenFormat"]));
@@ -142,7 +142,7 @@ namespace BardAfar {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Client disconnected: {0}")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Client disconnected: {0}:{1}")]
         public string LogWebSocketConnectionCloseFormat {
             get {
                 return ((string)(this["LogWebSocketConnectionCloseFormat"]));
@@ -170,30 +170,6 @@ namespace BardAfar {
             }
             set {
                 this["ServerInfoHostOrIpAddress"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("58470")]
-        public ushort ServerInfoPortHttpListener {
-            get {
-                return ((ushort)(this["ServerInfoPortHttpListener"]));
-            }
-            set {
-                this["ServerInfoPortHttpListener"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("58471")]
-        public ushort ServerInfoPortWebSocket {
-            get {
-                return ((ushort)(this["ServerInfoPortWebSocket"]));
-            }
-            set {
-                this["ServerInfoPortWebSocket"] = value;
             }
         }
         
@@ -254,6 +230,45 @@ namespace BardAfar {
             }
             set {
                 this["TrackPaddingSeconds"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("/")]
+        public string UrlPathFiles {
+            get {
+                return ((string)(this["UrlPathFiles"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("/")]
+        public string UrlPathPage {
+            get {
+                return ((string)(this["UrlPathPage"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("/")]
+        public string UrlPathWebSocket {
+            get {
+                return ((string)(this["UrlPathWebSocket"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("58470")]
+        public ushort ServerInfoPort {
+            get {
+                return ((ushort)(this["ServerInfoPort"]));
+            }
+            set {
+                this["ServerInfoPort"] = value;
             }
         }
     }

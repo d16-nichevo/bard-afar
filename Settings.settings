@@ -39,22 +39,16 @@
       <Value Profile="(Default)">1000</Value>
     </Setting>
     <Setting Name="LogWebSocketConnectionOpenFormat" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">Client connected: {0}</Value>
+      <Value Profile="(Default)">Client connected: {0}:{1}</Value>
     </Setting>
     <Setting Name="LogWebSocketConnectionCloseFormat" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">Client disconnected: {0}</Value>
+      <Value Profile="(Default)">Client disconnected: {0}:{1}</Value>
     </Setting>
     <Setting Name="UpdateSettings" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="ServerInfoHostOrIpAddress" Type="System.String" Scope="User">
       <Value Profile="(Default)">*</Value>
-    </Setting>
-    <Setting Name="ServerInfoPortHttpListener" Type="System.UInt16" Scope="User">
-      <Value Profile="(Default)">58470</Value>
-    </Setting>
-    <Setting Name="ServerInfoPortWebSocket" Type="System.UInt16" Scope="User">
-      <Value Profile="(Default)">58471</Value>
     </Setting>
     <Setting Name="ServerInfoAudioDirectory" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
@@ -70,6 +64,18 @@
     </Setting>
     <Setting Name="TrackPaddingSeconds" Type="System.UInt32" Scope="User">
       <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="UrlPathFiles" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">/</Value>
+    </Setting>
+    <Setting Name="UrlPathPage" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">/</Value>
+    </Setting>
+    <Setting Name="UrlPathWebSocket" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">/</Value>
+    </Setting>
+    <Setting Name="ServerInfoPort" Type="System.UInt16" Scope="User">
+      <Value Profile="(Default)">58470</Value>
     </Setting>
   </Settings>
 </SettingsFile>

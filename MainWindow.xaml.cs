@@ -26,8 +26,7 @@ namespace BardAfar
             }
         }
 
-        private HttpListener HttpListener;
-        private WebSocketServer WebSocketServer;
+        private WatsonServerManager WatsonServer;
         private CancellationTokenSource CancellationTokenSource;
         private DispatcherTimer Timer = new DispatcherTimer(DispatcherPriority.DataBind);
         private Random Random = new Random();
@@ -66,7 +65,7 @@ namespace BardAfar
 
             // Force validation on server setup parameters, in case
             // the default values are bad:
-            foreach (var textBox in new System.Windows.Controls.TextBox[] { HostOrIp, PortHttp, PortWs, AudioDir, TrackPadding })
+            foreach (var textBox in new System.Windows.Controls.TextBox[] { HostOrIp, Port, AudioDir, TrackPadding })
             {
                 textBox.GetBindingExpression(System.Windows.Controls.TextBox.TextProperty).UpdateSource();
             }
@@ -109,11 +108,10 @@ namespace BardAfar
             Uri uri = new Uri("/ClientPage.html", UriKind.Relative);
             StreamResourceInfo info = System.Windows.Application.GetResourceStream(uri);
             string clientPageText = new StreamReader(info.Stream).ReadToEnd();
-            clientPageText = clientPageText.Replace(Settings.Default.ClientPagePortToken, Convert.ToString(Model.PortWebSocket));
+            clientPageText = clientPageText.Replace(Settings.Default.ClientPagePortToken, Convert.ToString(Model.Port));
 
             // Start hosts:
-            HttpListener = new HttpListener(Model.HostOrIpAddress, Model.PortHttpListener, Model.AudioFilesDirectory, clientPageText, CancellationTokenSource.Token);
-            WebSocketServer = new WebSocketServer(Model.HostOrIpAddress, Model.PortWebSocket);
+            WatsonServer = new WatsonServerManager(Model.HostOrIpAddress, Model.Port, clientPageText, Model.AudioFilesDirectory, CancellationTokenSource.Token);
 
             // Update ListBox:
             UpdateListBox(Model.AudioFilesDirectory);
@@ -138,14 +136,11 @@ namespace BardAfar
 
                 // Let the Web Socket closing task take the time it needs,
                 // as it doesn't seem to misbehave:
-                Task taskCloseWebSocketServer = Task.Run(() => WebSocketServer.Close());
-                await taskCloseWebSocketServer;
-
-                // But don't wait very long for the HttpListener.
-                // It doesn't seem to heed its CancellationToken so
-                // we manually kill it. (This is something I might
-                // like to investigate and fix in the future.)
-                await HttpListener.Task.WaitAsync(TimeSpan.FromMilliseconds(Settings.Default.AppExitTimeoutMs));
+                if (WatsonServer != null)
+                {
+                    Task taskCloseWebSocketServer = Task.Run(() => WatsonServer.Close());
+                    await taskCloseWebSocketServer;
+                }
             }
         }
 
@@ -159,12 +154,12 @@ namespace BardAfar
         /// <param name="path">A path relative to the server path. E.g. "subDir/myMusic.mp3".</param>
         private void BroadcastPlay(string path)
         {
-            if (WebSocketServer != null)
+            if (WatsonServer != null)
             {
                 if (path == null) throw new ArgumentNullException(nameof(path));
                 path = path.Replace(@"\", "/");
                 path = HttpUtility.UrlPathEncode(path);
-                WebSocketServer.Broadcast(Settings.Default.WebSocketServerPath + path);
+                WatsonServer.Broadcast(Settings.Default.WebSocketServerPath + path);
             }
         }
 
@@ -173,9 +168,9 @@ namespace BardAfar
         /// </summary>
         private void BroadcastStop()
         {
-            if (WebSocketServer != null)
+            if (WatsonServer != null)
             {
-                WebSocketServer.Broadcast(Settings.Default.BroadcastStop);
+                WatsonServer.Broadcast(Settings.Default.BroadcastStop);
             }
         }
 
@@ -284,8 +279,7 @@ namespace BardAfar
         private void SaveSettings()
         {
             Settings.Default.ServerInfoHostOrIpAddress = Model.HostOrIpAddress;
-            Settings.Default.ServerInfoPortHttpListener = Model.PortHttpListener;
-            Settings.Default.ServerInfoPortWebSocket = Model.PortWebSocket;
+            Settings.Default.ServerInfoPort = Model.Port;
             Settings.Default.ServerInfoAudioDirectory = Model.AudioFilesDirectory;
             Settings.Default.Volume = Model.Volume;
             Settings.Default.LoopMode = (int)Model.LoopMode;
@@ -375,6 +369,25 @@ namespace BardAfar
                                         .AddSeconds(Settings.Default.TrackPaddingSeconds);
                 Timer.IsEnabled = true;
             }
+        }
+
+        /// <summary>
+        /// If the HttpListener faults, immediately close it.
+        /// </summary>
+        /// <remarks>
+        /// Do not worry about reporting the error, it'll be
+        /// caught in the App.xaml.cs last-chance error handling.
+        /// </remarks>
+        private void HttpListener_TaskFaulted(object? sender, EventArgs e)
+        {
+            // Run from the UI thread:
+            if (!Dispatcher.CheckAccess())
+            {
+                Dispatcher.Invoke(() => HttpListener_TaskFaulted(sender, e));
+                return;
+            }
+
+            StopHosts();
         }
 
         //////////////////////////////////////////

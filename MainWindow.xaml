@@ -59,8 +59,7 @@
                     <MultiDataTrigger>
                         <MultiDataTrigger.Conditions>
                             <Condition Binding="{Binding Path=(Validation.HasError), ElementName=HostOrIp}" Value="False"/>
-                            <Condition Binding="{Binding Path=(Validation.HasError), ElementName=PortHttp}" Value="False"/>
-                            <Condition Binding="{Binding Path=(Validation.HasError), ElementName=PortWs}" Value="False"/>
+                            <Condition Binding="{Binding Path=(Validation.HasError), ElementName=Port}" Value="False"/>
                             <Condition Binding="{Binding Path=(Validation.HasError), ElementName=AudioDir}" Value="False"/>
                             <Condition Binding="{Binding Path=(Validation.HasError), ElementName=TrackPadding}" Value="False"/>
                         </MultiDataTrigger.Conditions>
@@ -128,10 +127,8 @@
                     </Binding>
                 </TextBox.Text>
             </TextBox>
-            <Label Grid.Column="0" Grid.Row="1">Port (HTTP):</Label>
-            <TextBox Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Name="PortHttp" Text="{Binding PortHttpListener}"></TextBox>
-            <Label Grid.Column="0" Grid.Row="2">Port (WebSocket):</Label>
-            <TextBox Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Name="PortWs" Text="{Binding PortWebSocket}"></TextBox>
+            <Label Grid.Column="0" Grid.Row="1">Port:</Label>
+            <TextBox Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Name="Port" Text="{Binding Port}"></TextBox>
             <Label Grid.Column="0" Grid.Row="3">Audio Files Directory:</Label>
             <TextBox Grid.Column="1" Grid.Row="3" Name="AudioDir">
                 <TextBox.Text>

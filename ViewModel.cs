@@ -52,18 +52,11 @@ namespace BardAfar
             get => _hostOrIpAddress;
             set { _hostOrIpAddress = value; OnPropertyChanged(); }
         }
-        private ushort _portHttpListener = Settings.Default.ServerInfoPortHttpListener;
-        public ushort PortHttpListener
+        private ushort _port = Settings.Default.ServerInfoPort;
+        public ushort Port
         {
-            get => _portHttpListener;
-            set { _portHttpListener = value; OnPropertyChanged(); }
-        }
-
-        private ushort _portWebSocket = Settings.Default.ServerInfoPortWebSocket;
-        public ushort PortWebSocket
-        {
-            get => _portWebSocket;
-            set { _portWebSocket = value; OnPropertyChanged(); }
+            get => _port;
+            set { _port = value; OnPropertyChanged(); }
         }
 
         private uint _trackPaddingSeconds = Settings.Default.TrackPaddingSeconds;

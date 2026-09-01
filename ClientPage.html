@@ -136,7 +136,9 @@
             info.hidden = false;
 
             // Connect:
-            let url = "ws://" + location.hostname + ":" + portWebsocket + location.pathname;
+            let url = new URL(location.href);
+            url.protocol = "ws:";
+            url.port = portWebsocket;
             let ws = new WebSocket(url);
 
             // Setup events:
@@ -152,7 +154,7 @@
                     download.setAttribute("target", "_self");
                 }
                 else {
-                    audioElement.src = location.protocol + "//" + location.hostname + ":" + location.port + e.data;
+                    audioElement.src = new URL(e.data, location.href).toString();
                     var playPromise = audioElement.play();
                     if (playPromise !== undefined) {
                         playPromise.then(_ => {

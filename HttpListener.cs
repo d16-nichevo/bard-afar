@@ -18,6 +18,7 @@ namespace BardAfar
     internal class HttpListener
     {
         public Task Task { get; private set; }
+        public event EventHandler TaskFaulted;
 
         /// <summary>
         /// Create and start the HttpListener.
@@ -68,11 +69,21 @@ namespace BardAfar
                 }
             });
 
-            // Build the prefix. Should end up like http://myhost:9999/
-            string prefix = String.Format(Settings.Default.HttpListenerPrefixFormat, host, port);
+            // Build the prefix. IPv6 addresses need square brackets.
+            string hostForUrl = Uri.CheckHostName(host) == UriHostNameType.IPv6
+                ? $"[{host}]"
+                : host;
+
+            string prefix = String.Format(Settings.Default.HttpListenerPrefixFormat, hostForUrl, port);
 
             // Start the task:
             Task = HttpServer.ListenAsync(prefix, cancellationToken, Route.OnHttpRequestAsync, Settings.Default.HttpListenerMaxConnections);
+
+            // And if something goes wrong, throw exception:
+            Task.ContinueWith(t =>
+            {
+                TaskFaulted?.Invoke(this, new EventArgs<Exception?>(t.Exception));
+            });
         }
     }
 }

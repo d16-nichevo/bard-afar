@@ -20,8 +20,19 @@ namespace BardAfar
         {
             ValidationResult r = new ValidationResult(true, null);
             string host = (string)value;
-            if (Uri.CheckHostName(host) == UriHostNameType.Unknown
-                && host != "*" && host != "+")
+
+            // Certain known safe strings:
+            if (host == String.Empty
+                || host == "*"
+                || host == "+"
+                || host == "::"
+                || host == "0.0.0.0")
+            {
+                return r;
+            }
+
+            // Otherwise:
+            if (Uri.CheckHostName(host) == UriHostNameType.Unknown)
             {
                 return new ValidationResult(false, "Invalid host or IP address.");
             }
