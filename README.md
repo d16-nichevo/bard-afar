@@ -179,7 +179,6 @@ If you are running a server on your machine, your address is `http://XXX:YYY/`, 
 * `XXX` is your host name or IP address.
   * It's probably easiest to use an IPv4 address.
   * If you're hosting over the internet, you want your internet-facing IP address, not your IP address on your local network. Do an internet search for "what is my IP address"; there are a number of sites that will return your IP address. It should look something like `20.112.52.29`.
-  * IPv6 addresses *should* work. But I've not tested them, and so haven't documented them.
 * `YYY` is the port. This should be exactly the number you entered [here](#port), the default being `58470`.
 
 # Improvements
